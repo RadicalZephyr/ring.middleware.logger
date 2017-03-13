@@ -4,8 +4,7 @@
   (:require
    [org.tobereplaced (mapply :refer [mapply])]
    [clojure.java.io]
-   [onelog.core :as log]
-   [clj-logging-config.log4j :as log-config]
+   [clojure.tools.logging :as log]
    [clansi.core :as ansi]))
 
 
@@ -107,7 +106,7 @@ infrastructure, unless status is >= 500, in which case they are sent as errors."
    {:keys [request-method uri remote-addr] :as request}
    throwable totaltime]
   (error (str (style "Uncaught exception processing request:" :bright :red)  " for " remote-addr " in (" totaltime " ms) - request was: " request))
-  (error (log/throwable throwable)))
+  (error (log/error throwable)))
 
 
 (defn make-logger-middleware
@@ -140,30 +139,29 @@ middleware has a chance to do something with it.
   ;; https://gist.github.com/kognate/noir.incubator/blob/master/src/noir.incubator/middleware.clj
   (fn [request]
     (let [start (System/currentTimeMillis)]
-      (log-config/with-logging-context (format-id style (rand-int 0xffff))
-        (try
-          (pre-logger options
-                      request)
+      (try
+        (pre-logger options
+                    request)
 
-          (let [response (handler request)
-                finish (System/currentTimeMillis)
+        (let [response (handler request)
+              finish (System/currentTimeMillis)
+              total  (- finish start)]
+
+          (post-logger options
+                       request
+                       response
+                       total)
+
+          response)
+
+        (catch Throwable t
+          (let [finish (System/currentTimeMillis)
                 total  (- finish start)]
-
-            (post-logger options
-                         request
-                         response
-                         total)
-
-            response)
-
-          (catch Throwable t
-            (let [finish (System/currentTimeMillis)
-                  total  (- finish start)]
-              (exception-logger options
-                                request
-                                t
-                                total))
-            (throw t)))))))
+            (exception-logger options
+                              request
+                              t
+                              total))
+          (throw t))))))
 
 
 (def default-options
