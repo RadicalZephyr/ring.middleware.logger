@@ -8,6 +8,10 @@ only contains changes since the fork.
 <!-- ### Changed -->
 <!-- - Add a new arity to `make-widget-async` to provide a different widget shape. -->
 
+## [0.6.0] - 2017-03-12
+
+Exchanged onelog opinionated logging dependency for using `clojure.tools.logging`.
+
 ## [0.5.1] - 2017-03-12
 
 Compatible with Clojure 1.9 due to bumped onelog version.
