@@ -1,9 +1,11 @@
 [![Clojars Project](https://img.shields.io/clojars/v/lambdaisland/ring.middleware.logger.svg)](https://clojars.org/lambdaisland/ring.middleware.logger)
 
-This is a fork of the
+This is a(nother) fork of the
 [original ring.middleware.logger](https://github.com/pjlegato/ring.middleware.logger)
 by [pjlegato](https://github.com/pjlegato), which seemingly has become
-unmaintained. See the [CHANGELOG](CHANGELOG.md) for differences.
+unmaintained. See the [CHANGELOG](CHANGELOG.md) for differences. The
+main thrust of the changes is to remove the (IMHO) probelmatic onelog
+library in favor of simply relying on `clojure.tools.logging`.
 
 ring.middleware.logger
 ======================
@@ -23,7 +25,7 @@ Usage
 In your `project.clj`, add the following dependency:
 
 ```clojure
-    [lambdaisland/ring.middleware.logger "0.5.1"]
+    [radicalzephyr/ring.middleware.logger "0.6.0-SNAPSHOT"]
 ```
 
 

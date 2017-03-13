@@ -1,4 +1,4 @@
-(defproject lambdaisland/ring.middleware.logger "0.5.1"
+(defproject radicalzephyr/ring.middleware.logger "0.6.0-SNAPSHOT"
   :description "Ring middleware to log each request."
   :url "https://github.com/lambdaisland/ring.middleware.logger"
   :license {:name "Eclipse Public License"
