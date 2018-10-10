@@ -4,7 +4,7 @@ This is a(nother) fork of the
 [original ring.middleware.logger](https://github.com/pjlegato/ring.middleware.logger)
 by [pjlegato](https://github.com/pjlegato), which seemingly has become
 unmaintained. See the [CHANGELOG](CHANGELOG.md) for differences. The
-main thrust of the changes is to remove the (IMHO) probelmatic onelog
+main thrust of the changes is to remove the (IMHO) problematic onelog
 library in favor of simply relying on `clojure.tools.logging`.
 
 ring.middleware.logger
@@ -29,7 +29,7 @@ In your `project.clj`, add the following dependency:
 ```
 
 
-Then, just add the middleware to your stack. It comes preconfigured with
+Then, just add the middleware to your stack. It comes pre-configured with
 reasonable defaults, which append ANSI colorized log messages on each
 request to whatever logger is in use by clojure.tools.logging.
 
